@@ -1,6 +1,6 @@
 # TOP-Etch-a-Sketch
 
-This project is a part of my learning journey with The Odin Project's FOundation Course. The aim of this project is to improve DOM manipulation, Javascript and CSS Skills by recreating a browser based version of the classic Etch-A-Sketch toy.
+This project is a part of my learning journey with The Odin Project's Foundation Course. The aim of this project is to improve DOM manipulation, Javascript and CSS Skills by recreating a browser based version of the classic Etch-A-Sketch toy.
 
 # Introduction
 
