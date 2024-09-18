@@ -40,6 +40,16 @@ const resetBtn = document.createElement("button");
 resetBtn.id = "resetBtn";
 resetBtn.textContent = "Reset Grid";
 
+// Creating an eraser button
+const eraserBtn = document.createElement("button");
+eraserBtn.id = "eraserBtn";
+eraserBtn.textContent = "Erase";
+
+// Creating a draw button
+const drawBtn = document.createElement("button");
+drawBtn.id = "drawBtn";
+drawBtn.textContent = "Draw";
+
 // Creating the random color button
 const randColorBtn = document.createElement("button");
 randColorBtn.id = "randColorBtn";
@@ -51,6 +61,8 @@ pickColorBtn.id = "pickColorBtn";
 pickColorBtn.textContent = "Choose Colour";
 
 // Append the buttons to the container below the grid
+optionsBtnContainer.appendChild(drawBtn);
+optionsBtnContainer.appendChild(eraserBtn);
 optionsBtnContainer.appendChild(resetBtn);
 optionsBtnContainer.appendChild(randColorBtn);
 optionsBtnContainer.appendChild(pickColorBtn);
@@ -58,9 +70,50 @@ optionsBtnContainer.appendChild(pickColorBtn);
 // Append the options button container to the body
 document.body.appendChild(optionsBtnContainer);
 
-// Function to get value and generate a new grid
+// Adding Event listeners to buttons
 getValueBtn.addEventListener("click",  getValue);
 resetBtn.addEventListener("click", resetGrid);
+eraserBtn.addEventListener("click", eraseGrid);
+drawBtn.addEventListener("click", drawTool);
+randColorBtn.addEventListener("click", enableRandomColor);
+
+// Function to generate random colors
+function generateRandomColor(){
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+// Function to enable random color
+function enableRandomColor(){
+    const gridItem = document.querySelectorAll(".grid-item");
+    gridItem.forEach(item => {
+        item.addEventListener("mouseover", function(){
+            item.style.backgroundColor = generateRandomColor();
+        })
+    })
+}
+
+// Function to activate the draw tool 
+function drawTool(){
+    const gridItem = document.querySelectorAll(".grid-item");
+    gridItem.forEach(item => {
+        item.addEventListener("mouseover", function(){
+            item.style.backgroundColor = "black";
+        })
+    })
+}
+
+// Function to erase some grid colour
+function eraseGrid(){
+    const gridItem = document.querySelectorAll(".grid-item");
+    gridItem.forEach(item => {
+        item.addEventListener("mouseover", function(){
+            item.style.backgroundColor = "lightgrey";
+        });
+    });
+}
 
 // Function to reset grid
 function resetGrid(){
