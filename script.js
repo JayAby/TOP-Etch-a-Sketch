@@ -1,5 +1,12 @@
 const container = document.querySelector(".container");
 
+// Making a header for the topic
+const pageTopic = document.createElement("h1");
+pageTopic.id = "pageTopic";
+pageTopic.textContent = "Etch-a-Sketch";
+pageTopic.style.textAlign = "center";
+pageTopic.style.marginBottom = "20px";
+
 // Making a container for the grid size
 const gridSizeContainer = document.createElement("div");
 gridSizeContainer.id = "gridSizeContainer";
@@ -28,6 +35,8 @@ gridSizeContainer.appendChild(gridSizeText);
 gridSizeContainer.appendChild(gridSizeTextbox);
 gridSizeContainer.appendChild(getValueBtn);
 
+// Append the pageTopic to the body before the grid size container
+document.body.insertBefore(pageTopic, document.body.firstChild);
 // Append the grid size container to the body, before the grid container
 document.body.insertBefore(gridSizeContainer, container);
 
@@ -60,11 +69,17 @@ const pickColorBtn = document.createElement("button");
 pickColorBtn.id = "pickColorBtn";
 pickColorBtn.textContent = "Choose Colour";
 
+// Create a color picker
+const colorPicker = document.createElement("input");
+colorPicker.setAttribute("type", "color");
+colorPicker.setAttribute("value", "#000000");
+
 // Append the buttons to the container below the grid
 optionsBtnContainer.appendChild(drawBtn);
 optionsBtnContainer.appendChild(eraserBtn);
 optionsBtnContainer.appendChild(resetBtn);
 optionsBtnContainer.appendChild(randColorBtn);
+optionsBtnContainer.appendChild(colorPicker);
 optionsBtnContainer.appendChild(pickColorBtn);
 
 // Append the options button container to the body
@@ -76,6 +91,18 @@ resetBtn.addEventListener("click", resetGrid);
 eraserBtn.addEventListener("click", eraseGrid);
 drawBtn.addEventListener("click", drawTool);
 randColorBtn.addEventListener("click", enableRandomColor);
+pickColorBtn.addEventListener("click", enableUserColor);
+
+
+// Function to enable user-select a color
+function enableUserColor(){
+    const gridItem = document.querySelectorAll(".grid-item");
+    gridItem.forEach(item => {
+        item.addEventListener("mouseover", function(){
+            item.style.backgroundColor = colorPicker.value; // Apply selected color on hover
+        });
+    });
+}
 
 // Function to generate random colors
 function generateRandomColor(){
@@ -200,3 +227,12 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 });
 
+
+// Code to Toggle the theme
+const toggleThemeBtn = document.createElement("button");
+toggleThemeBtn.textContent = "Toggle theme";
+optionsBtnContainer.appendChild(toggleThemeBtn);
+
+toggleThemeBtn.addEventListener('click', () =>{
+    document.body.classList.toggle("dark-theme");
+})
